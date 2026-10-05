@@ -14,30 +14,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <!-- SheetJS for Excel export -->
     <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
-    <script>
-        const urlGAS="https://script.google.com/macros/s/AKfycbwElN0Jo7EygEI12G5YekmIpEyOTM9fSRTcIQeVcXiCOiA1ofa4zh95yBLCe5n0uYS5Cg/exec"
-        document.getElementById('myForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const data = {
-                barang: document.getElementById('namaBarang').value
-            };
-
-            // Mengirim data dari Vercel ke Google Apps Script
-            fetch(urlGAS, {
-                method: 'POST',
-                body: JSON.stringify(data)
-            })
-            .then(response => response.text())
-            .then(result => {
-                alert('Data berhasil dikirim ke Google Spreadsheet!');
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('Gagal mengirim data.');
-            });
-        }); 
-    </script>
     
     <style>
         :root {
@@ -174,7 +150,31 @@
     </style>
 </head>
 <body>
+<script>
+        const urlGAS="https://script.google.com/macros/s/AKfycbwElN0Jo7EygEI12G5YekmIpEyOTM9fSRTcIQeVcXiCOiA1ofa4zh95yBLCe5n0uYS5Cg/exec"
+        document.getElementById('myForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const data = {
+                barang: document.getElementById('namaBarang').value
+            };
 
+            // Mengirim data dari Vercel ke Google Apps Script
+            fetch(urlGAS, {
+                method: 'POST',
+                body: JSON.stringify(data)
+            })
+            .then(response => response.text())
+            .then(result => {
+                alert('Data berhasil dikirim ke Google Spreadsheet!');
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Gagal mengirim data.');
+            });
+        }); 
+    </script>
+    
     <div id="loadingOverlay" class="loading-overlay">
         <div class="text-center">
             <div class="spinner-border text-primary mb-3" role="status" style="width: 4rem; height: 4rem; border-width: 0.3rem;"></div>
