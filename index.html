@@ -151,28 +151,33 @@
 </head>
 <body>
 <script>
-        const urlGAS="https://script.google.com/macros/s/AKfycbwElN0Jo7EygEI12G5YekmIpEyOTM9fSRTcIQeVcXiCOiA1ofa4zh95yBLCe5n0uYS5Cg/exec"
-        document.getElementById('myForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const data = {
-                barang: document.getElementById('namaBarang').value
-            };
+   const urlGAS = "https://script.google.com/macros/s/AKfycbwElN0Jo7EygEI12G5YekmIpEyOTM9fSRTcIQeVcXiCOiA1ofa4zh95yBLCe5n0uYS5Cg/exec";
 
-            // Mengirim data dari Vercel ke Google Apps Script
-            fetch(urlGAS, {
-                method: 'POST',
-                body: JSON.stringify(data)
-            })
-            .then(response => response.text())
-            .then(result => {
-                alert('Data berhasil dikirim ke Google Spreadsheet!');
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('Gagal mengirim data.');
+        // Pastikan nama ID form disesuaikan (misal: 'formProduksi')
+        const form = document.getElementById('formProduksi'); 
+        if (form) {
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const data = {
+                    barang: document.getElementById('inpKodeProduk').value
+                };
+
+                // Mengirim data ke Google Apps Script
+                fetch(urlGAS, {
+                    method: 'POST',
+                    body: JSON.stringify(data)
+                })
+                .then(response => response.text())
+                .then(result => {
+                    alert('Data berhasil dikirim ke Google Spreadsheet!');
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Gagal mengirim data.');
+                });
             });
-        }); 
+        }; 
     </script>
     
     <div id="loadingOverlay" class="loading-overlay">
